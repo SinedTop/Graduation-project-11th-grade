@@ -3,10 +3,10 @@ using UnityEngine;
 
 public class RangeEnemy : Enemy
 {
+    
     [SerializeField] private GameObject[] _weapon;
     [SerializeField] private float _range;
-    [SerializeField] private NonAutomaticWeapon[] _nonAutomaticWeapon;
-    [SerializeField] private AutomaticWeapon[] _automaticWeapon;
+    [SerializeField] private Weapon[] _weaponsScript;
     private bool _dontSee;
     private void Awake()
     {
@@ -37,15 +37,7 @@ public class RangeEnemy : Enemy
         if(hit.collider.gameObject == _targetTransform.gameObject)
         {
             _dontSee = false;
-
-            if(_nonAutomaticWeapon.Length != 0)
-            {
-                for (int i = 0; i < _nonAutomaticWeapon.Length; i++) _nonAutomaticWeapon[i].MakeShoot();
-            }
-            if(_automaticWeapon.Length != 0)
-            {
-                for (int i = 0; i < _nonAutomaticWeapon.Length; i++) _automaticWeapon[i].StartShooting(true);
-            }
+             for (int i = 0; i < _weaponsScript.Length; i++) _weaponsScript[i].MakeShoot(true);
         }
         else
         {
@@ -56,9 +48,9 @@ public class RangeEnemy : Enemy
     }
     private void StopShooting()
     {
-        if (_automaticWeapon.Length != 0)
+        if (_weaponsScript.Length != 0)
         {
-            for (int i = 0; i < _nonAutomaticWeapon.Length; i++) _automaticWeapon[i].StartShooting(false);
+            for (int i = 0; i < _weaponsScript.Length; i++) _weaponsScript[i].MakeShoot(false);
         }
     }
 }

@@ -17,8 +17,7 @@ public class PlayerController : MonoBehaviour
 
     public GameObject[] _takedWeapons;
     private int _currentWeapon = 0;
-    private AutomaticWeapon _currentWeaponAutomatic;
-    private NonAutomaticWeapon _currentWeaponNonAutomatic;
+    private Weapon _weapon;
     private GameObject _currentWeaponObj;
 
     public void TakeHit(int _hitHealth)
@@ -50,31 +49,22 @@ public class PlayerController : MonoBehaviour
             else _currentWeapon = 0;
             RefreshWeapon();
         }
+        if (_weapon == null) return;
 
         if (Input.GetMouseButtonDown(0))
         {
-            if (_currentWeaponAutomatic != null) _currentWeaponAutomatic.StartShooting(true);
-            if (_currentWeaponNonAutomatic != null) _currentWeaponNonAutomatic.MakeShoot();
+            _weapon.MakeShoot(true);
         }
-        else if(Input.GetMouseButtonUp(0) && _currentWeaponAutomatic != null)
+        else if(Input.GetMouseButtonUp(0))
         {
-            _currentWeaponAutomatic.StartShooting(false);
+            _weapon.MakeShoot(false);
         }
     }
     private void RefreshWeapon()
     {
         if (_currentWeaponObj != null) Destroy(_currentWeaponObj);
         _currentWeaponObj = Instantiate(_takedWeapons[_currentWeapon], transform);
-        var _weapon = GetComponent<Weapon>();
-        if (_currentWeaponObj.GetComponent<AutomaticWeapon>() != null)
-        {
-            _currentWeaponAutomatic = _currentWeaponObj.GetComponent<AutomaticWeapon>();
-            _currentWeaponNonAutomatic = null;
-        }
-        if (_currentWeaponObj.GetComponent<NonAutomaticWeapon>() != null)
-        {
-            _currentWeaponNonAutomatic = _currentWeaponObj.GetComponent<NonAutomaticWeapon>();
-            _currentWeaponAutomatic = null;
-        }
+        _weapon = _currentWeaponObj.GetComponent<Weapon>();
+        
     }
 }

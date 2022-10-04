@@ -4,9 +4,10 @@ using UnityEngine;
 public class AutomaticWeapon : Weapon
 {
     private bool _startedShooting;
-    public void StartShooting(bool _start)
+   
+    public override void MakeShoot(bool _startShooting)
     {
-        if(_start && !_startedShooting) StartCoroutine("Shooting");
+        if(_startShooting && !_startedShooting) StartCoroutine("Shooting");
         else { StopCoroutine("Shooting"); _startedShooting = false; }
     }
     private IEnumerator Shooting()

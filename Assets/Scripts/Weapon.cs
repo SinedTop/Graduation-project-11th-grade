@@ -28,6 +28,10 @@ public abstract class Weapon : MonoBehaviour
         if (transform.rotation.eulerAngles.z <= 270 && transform.rotation.eulerAngles.z >= 90) _sprite.flipY = true;
         else _sprite.flipY = false;
     }
+    public virtual void MakeShoot(bool _startShooting)
+    {
+
+    }
     protected void Shoot()
     {
         if (_reloading) return;

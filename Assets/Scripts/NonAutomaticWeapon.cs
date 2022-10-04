@@ -4,7 +4,7 @@ using UnityEngine;
 public class NonAutomaticWeapon : Weapon
 {
     private bool _rate;
-    public void MakeShoot()
+    public override void MakeShoot(bool _startShooting)
     {
         if (_rate) return;
         Shoot();

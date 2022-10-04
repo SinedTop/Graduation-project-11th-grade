@@ -1,12 +1,15 @@
 using UnityEngine;
-
+[RequireComponent(typeof(PlayerController))]
 public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody2D _playerRB;
 
+    private PlayerController _playerCon;
+
     private void Start()
     {
         _playerRB = GetComponent<Rigidbody2D>();
+        _playerCon = GetComponent<PlayerController>();
     }
 
     private void FixedUpdate()
@@ -26,6 +29,6 @@ public class PlayerMovement : MonoBehaviour
         else if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) Y = 1;
         else Y = 0;
 
-        _playerRB.MovePosition(_playerRB.position + new Vector2(X, Y) * 10 * Time.fixedDeltaTime);
+        _playerRB.MovePosition(_playerRB.position + new Vector2(X, Y) * _playerCon._speed * Time.fixedDeltaTime);
     }
 }

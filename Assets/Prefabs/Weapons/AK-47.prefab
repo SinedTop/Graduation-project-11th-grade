@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1916857145096134321}
   - component: {fileID: 1916857145096134320}
-  - component: {fileID: 1916857145096134323}
+  - component: {fileID: 2733888056741311140}
   m_Layer: 0
   m_Name: AK-47
   m_TagString: Untagged
@@ -26,13 +26,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1916857145096134322}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 10.68, y: -2.36, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1916857145417402343}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1916857145096134320
 SpriteRenderer:
@@ -86,7 +86,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1916857145096134323
+--- !u!114 &2733888056741311140
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -95,17 +95,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 1916857145096134322}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5cdfa19ca6d59e84ea6bb0125c05a6e9, type: 3}
+  m_Script: {fileID: 11500000, guid: 0567d45535ded55408640d8dc8d3de82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _bulletStartPosition: {fileID: 1916857145417402343}
-  _reloadTime: 1
-  _maxAmmo: 8
-  _firingRate: 0.2
-  _maxRange: 0
-  _bulletSpeed: 0
+  _reloadTime: 2
+  _maxAmmo: 30
+  _firingRate: 0.05
+  _maxRange: 50
+  _bulletSpeed: 30
   _bullet: {fileID: 1553790709553119413, guid: fc508c425e135ec42891956ec729965e, type: 3}
-  _power: 0
+  _power: 10
 --- !u!1 &1916857145417402342
 GameObject:
   m_ObjectHideFlags: 0

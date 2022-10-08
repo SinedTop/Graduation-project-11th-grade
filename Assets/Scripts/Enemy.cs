@@ -2,11 +2,8 @@ using UnityEngine;
 using UnityEngine.AI;
 using System.Collections;
 
-public abstract class Enemy : MonoBehaviour
+public abstract class Enemy : Stats
 {
-    [SerializeField] protected int _health;
-    [SerializeField] protected float _speed;
-    [SerializeField] protected int _power;
     [SerializeField] private float _chooseTargetTime = 3;
     [SerializeField] protected float _stoppingDistance;
 
@@ -15,6 +12,7 @@ public abstract class Enemy : MonoBehaviour
     protected Transform _targetTransform;
     protected void Start()
     {
+        _health = _maxHealth;
         _agent = GetComponent<NavMeshAgent>();
         _agent.updateRotation = false;
         _agent.updateUpAxis = false;

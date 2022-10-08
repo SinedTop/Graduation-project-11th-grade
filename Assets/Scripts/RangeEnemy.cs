@@ -6,11 +6,17 @@ public class RangeEnemy : Enemy
     
     [SerializeField] private GameObject[] _weapon;
     [SerializeField] private float _range;
-    [SerializeField] private Weapon[] _weaponsScript;
+    private Weapon[] _weaponsScript;
     private bool _dontSee;
     private void Awake()
     {
+        _weaponsScript = new Weapon[_weapon.Length];
+
         _stoppingDistance = _range;
+        for(int i = 0; i < _weapon.Length; i++)
+        {
+            _weaponsScript[i] = _weapon[i].GetComponent<Weapon>();
+        }
     }
     private void FixedUpdate()
     {
@@ -37,7 +43,7 @@ public class RangeEnemy : Enemy
         if(hit.collider.gameObject == _targetTransform.gameObject)
         {
             _dontSee = false;
-             for (int i = 0; i < _weaponsScript.Length; i++) _weaponsScript[i].MakeShoot(true);
+            for (int i = 0; i < _weaponsScript.Length; i++) _weaponsScript[i].MakeShoot(true, "Player");
         }
         else
         {
@@ -50,7 +56,7 @@ public class RangeEnemy : Enemy
     {
         if (_weaponsScript.Length != 0)
         {
-            for (int i = 0; i < _weaponsScript.Length; i++) _weaponsScript[i].MakeShoot(false);
+            for (int i = 0; i < _weaponsScript.Length; i++) _weaponsScript[i].MakeShoot(false, "Player");
         }
     }
 }

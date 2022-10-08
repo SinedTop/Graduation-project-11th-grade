@@ -8,7 +8,7 @@ public class BomberEnemy : Enemy
     {
         if(collision.gameObject.tag == "Player")
         {
-            collision.gameObject.GetComponent<PlayerController>().TakeHit(_power);
+            collision.gameObject.GetComponent<PlayerController>().TakeHit(_strength);
             Destroy(gameObject);
         }
     }

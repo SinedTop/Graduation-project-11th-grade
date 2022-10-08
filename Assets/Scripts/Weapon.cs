@@ -28,11 +28,11 @@ public abstract class Weapon : MonoBehaviour
         if (transform.rotation.eulerAngles.z <= 270 && transform.rotation.eulerAngles.z >= 90) _sprite.flipY = true;
         else _sprite.flipY = false;
     }
-    public virtual void MakeShoot(bool _startShooting)
+    public virtual void MakeShoot(bool _startShooting, string _targetTag)
     {
 
     }
-    protected void Shoot()
+    protected void Shoot(string _targetTag)
     {
         if (_reloading) return;
         if (_currentAmmo <= 0)
@@ -50,6 +50,7 @@ public abstract class Weapon : MonoBehaviour
             _bull._maxRange = _maxRange;
             _bull._speed = _bulletSpeed;
             _bull._power = _power;
+            _bull._targetTag = _targetTag;
         }
     }
     public void Reload()

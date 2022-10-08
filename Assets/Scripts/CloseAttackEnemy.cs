@@ -20,7 +20,7 @@ public class CloseAttackEnemy : Enemy
         for(; ; )
         {
             yield return new WaitForSeconds(_attackSpeed);
-            _player.TakeHit(_power);
+            _player.TakeHit(_strength);
         }
     }
 }

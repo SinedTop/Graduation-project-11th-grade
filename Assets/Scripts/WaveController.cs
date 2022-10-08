@@ -4,64 +4,69 @@ using UnityEngine;
 
 public class WaveController : MonoBehaviour
 {
-    static public int _wave;
-    static public int _enemyRemained;
-    public int _enemySpawned;
+    public int _wave;
+    public int _time;
+
     [SerializeField] private GameObject[] _easyEnemy, _mediumEnemy, _hardEnemy;
-    private GameObject[] _buffer = new GameObject[50];
+
     private void Start()
     {
         StartCoroutine(Wave());
     }
-
-    private IEnumerator Wave()
+    private IEnumerator Timer()
     {
-        _wave++;
-        int _enemysOnLvl = Random.Range(100, 150) + (int)Mathf.Sqrt(_wave);
-        _enemyRemained = _enemysOnLvl;
-
-        for(int i = 0; i < _buffer.Length; i++)
+        for (; _time >= 0; _time--)
         {
-            SpawnEnemy(i);
-            print(_buffer[i].gameObject);
-            yield return new WaitForSeconds(0.1f);
-        }
-
-        for (; _enemySpawned < _enemysOnLvl;)
-        {
-            for(int i = 0; i < _buffer.Length; i++)
-                {
-                if (_enemySpawned >= _enemysOnLvl) break;
-                if (_buffer[i] == null)
-                {
-                    _enemyRemained--;
-                    SpawnEnemy(i);
-                }
-            }
+            HUDController.Instance.UpdateTimerText(_time);
             yield return new WaitForSeconds(1);
         }
         yield return null;
     }
-
-    private void SpawnEnemy(int i)
+    private IEnumerator Wave()
     {
-        if (_enemySpawned % 10 == 0 && _wave > 3)
+        _wave++;
+        _time = _wave * 25;
+        StartCoroutine(Timer());
+        for (; ; )
         {
-            _buffer[i] = Instantiate(_mediumEnemy[Random.Range(0, _mediumEnemy.Length)]);
-            _buffer[i].transform.position = new Vector3(Random.Range(-25, 25), Random.Range(-25, 25), 0);
-            _enemySpawned++;
+            if (_time <= 0) yield return null;
+
+            int enemyType = Random.Range(0, 100);
+            if (enemyType <= 60)
+            {
+                int enemysToSpawn = Random.Range(5, 30);
+                for(int i = 0; i < enemysToSpawn; i++)
+                {
+                    SpawnEnemy(_easyEnemy[Random.Range(0, _easyEnemy.Length)]);
+                    yield return new WaitForSeconds(0.05f);
+                }
+            }
+            else if (enemyType > 60 && enemyType <= 85 && _wave > 3)
+            {
+                int enemysToSpawn = Random.Range(3, 15);
+                for (int i = 0; i < enemysToSpawn; i++)
+                {
+                    SpawnEnemy(_mediumEnemy[Random.Range(0, _mediumEnemy.Length)]);
+                    yield return new WaitForSeconds(0.05f);
+                }
+            }
+            else if (enemyType > 85 && _wave > 8)
+            {
+                int enemysToSpawn = Random.Range(1, 5);
+                for (int i = 0; i < enemysToSpawn; i++)
+                {
+                    SpawnEnemy(_hardEnemy[Random.Range(0, _hardEnemy.Length)]);
+                    yield return new WaitForSeconds(0.05f);
+                }
+            }
+
+            yield return new WaitForSeconds(10);
         }
-        else if (_enemySpawned % 25 == 0 && _wave > 8)
-        {
-            _buffer[i] = Instantiate(_hardEnemy[Random.Range(0, _hardEnemy.Length)]);
-            _buffer[i].transform.position = new Vector3(Random.Range(-25, 25), Random.Range(-25, 25), 0);
-            _enemySpawned++;
-        }
-        else
-        {
-            _buffer[i] = Instantiate(_easyEnemy[Random.Range(0, _easyEnemy.Length)]);
-            _buffer[i].transform.position = new Vector3(Random.Range(-25, 25), Random.Range(-25, 25), 0);
-            _enemySpawned++;
-        }
+
+    }
+    private void SpawnEnemy(GameObject _objToSpawn)
+    {
+        var buffer = Instantiate(_objToSpawn);
+        buffer.transform.position = new Vector3(Random.Range(-25, 25), Random.Range(-25, 25), 0);
     }
 }

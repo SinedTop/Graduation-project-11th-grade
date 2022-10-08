@@ -4,10 +4,10 @@ using UnityEngine;
 public class NonAutomaticWeapon : Weapon
 {
     private bool _rate;
-    public override void MakeShoot(bool _startShooting)
+    public override void MakeShoot(bool _startShooting, string _targetTag)
     {
         if (_rate) return;
-        Shoot();
+        Shoot(_targetTag);
         StartCoroutine(Rate());
     }
     private IEnumerator Rate()

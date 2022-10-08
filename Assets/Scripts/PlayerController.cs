@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : Stats
 {
     public int _money;
 
@@ -8,25 +8,14 @@ public class PlayerController : MonoBehaviour
     public int _moneyCollected;
     public int _numberOfDeaths;
 
-    public int _health = 100;
-
-    public int _maxHealth = 100;
-    public float _speed = 1;
-    public float _strength = 1;
-    public float _resist;
-
     public GameObject[] _takedWeapons;
     private int _currentWeapon = 0;
     private Weapon _weapon;
     private GameObject _currentWeaponObj;
 
-    public void TakeHit(int _hitHealth)
-    {
-        _health -= (int)(_hitHealth - _resist * _hitHealth);
-        if (_health <= 0) _numberOfDeaths += 1;
-    }
     private void Start()
     {
+        _health = _maxHealth;
         RefreshWeapon();
     }
     private void FixedUpdate()
@@ -53,11 +42,11 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            _weapon.MakeShoot(true);
+            _weapon.MakeShoot(true, "Enemy");
         }
         else if(Input.GetMouseButtonUp(0))
         {
-            _weapon.MakeShoot(false);
+            _weapon.MakeShoot(false, "Enemy");
         }
     }
     private void RefreshWeapon()
@@ -66,5 +55,10 @@ public class PlayerController : MonoBehaviour
         _currentWeaponObj = Instantiate(_takedWeapons[_currentWeapon], transform);
         _weapon = _currentWeaponObj.GetComponent<Weapon>();
         
+    }
+    public override void Die()
+    {
+        _numberOfDeaths++;
+        Destroy(gameObject);
     }
 }

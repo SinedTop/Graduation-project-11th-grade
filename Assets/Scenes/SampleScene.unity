@@ -29132,6 +29132,7 @@ MonoBehaviour:
   - {fileID: 4950509284037290820, guid: 427d095253d0e9c49a1776078d80d59b, type: 3}
   _mediumEnemy: []
   _hardEnemy: []
+  _enemySpawnpoint: {fileID: 3700850428537902255, guid: cd10da28fb860df4d877a68017f9bfcb, type: 3}
 --- !u!114 &2006966974 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 427923875326083168, guid: 427d095253d0e9c49a1776078d80d59b, type: 3}

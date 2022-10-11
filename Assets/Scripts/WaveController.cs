@@ -8,6 +8,7 @@ public class WaveController : MonoBehaviour
     public int _time;
 
     [SerializeField] private GameObject[] _easyEnemy, _mediumEnemy, _hardEnemy;
+    [SerializeField] private GameObject _enemySpawnpoint;
 
     private void Start()
     {
@@ -66,7 +67,8 @@ public class WaveController : MonoBehaviour
     }
     private void SpawnEnemy(GameObject _objToSpawn)
     {
-        var buffer = Instantiate(_objToSpawn);
+        var buffer = Instantiate(_enemySpawnpoint);
+        buffer.GetComponent<Spawner>()._objectToSpawn = _objToSpawn;
         buffer.transform.position = new Vector3(Random.Range(-25, 25), Random.Range(-25, 25), 0);
     }
 }

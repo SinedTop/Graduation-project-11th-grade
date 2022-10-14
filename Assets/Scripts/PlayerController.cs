@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 
 public class PlayerController : Stats
 {
@@ -13,6 +14,7 @@ public class PlayerController : Stats
     private Weapon _weapon;
     private GameObject _currentWeaponObj;
 
+    public Action _itemAction;
     private void Start()
     {
         _health = _maxHealth;

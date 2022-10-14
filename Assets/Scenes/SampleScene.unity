@@ -28569,7 +28569,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &1168338366
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -29098,7 +29098,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1964368649
 Transform:
   m_ObjectHideFlags: 0
@@ -29155,6 +29155,10 @@ PrefabInstance:
     - target: {fileID: 4950509284037290820, guid: 427d095253d0e9c49a1776078d80d59b, type: 3}
       propertyPath: m_Name
       value: EnemyRange
+      objectReference: {fileID: 0}
+    - target: {fileID: 4950509284037290820, guid: 427d095253d0e9c49a1776078d80d59b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4950509284037290829, guid: 427d095253d0e9c49a1776078d80d59b, type: 3}
       propertyPath: _weaponsScript.Array.size
